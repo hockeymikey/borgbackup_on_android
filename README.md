@@ -41,12 +41,12 @@ are due to the Android linker. More details can be found at https://stackoverflo
 So all in all my Android backup setup looks like:
 - borg, termux and tasker
 - termux: Task (https://f-droid.org/packages/com.termux.tasker/) for tasker integration
-- tsu (modified so that it takes commands with -c): https://github.com/ravenschade/tsu
+- tsu (using tsudo of the tsu package)
 - .termux/tasker/backup.sh:
 ``` bash
 #!/data/data/com.termux/files/usr/bin/bash
 date
-tsu -e -c "~/borgbackup_on_android/borg.sh"
+tsudo "~/borgbackup_on_android/borg.sh"
 date
 read
 ```
@@ -54,11 +54,15 @@ read
 ```bash
 #!/data/data/com.termux/files/usr/bin/bash
 t=`date +%d_%m_%Y`
-export BORG_UNKNOWN_UNENCRYPTED_REPO_ACCESS_IS_OK=yes
+# export BORG_UNKNOWN_UNENCRYPTED_REPO_ACCESS_IS_OK=yes
 export BORG_RELOCATED_REPO_ACCESS_IS_OK=yes
-host=angler
+host=phone
 dirs="/ /system /vendor /cache /persist /firmware /storage /data"
+titanium="/storage/emulated/0/TitaniumBackup"
 export BORG_RSH=borg_ssh_wrapper
 source /data/data/com.termux/files/home/borgbackup_on_android/borg-env/bin/activate
-borg create -C lz4 -p -v --stats --one-file-system backup:/backup/borg/$host::$t $dirs # 2> ~/borg_backup_${t}.err
+borg create -C lz4 -p -v --stats --one-file-system backup:/backup/borg/$host::filesystem-$t $dirs
+borg create -C lz4 -p -v --stats --one-file-system backup:/backup/borg/$host::titaniumbackup-$t $titanium
 ```
+
+Dont forget to set ssh configs accordingly!

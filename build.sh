@@ -34,6 +34,7 @@ make install
 cd ..
 
 #download and build libattr
+gpg2 --recv-keys --keyserver=https://pgp.surfnet.nl 0542DF34
 wget https://download.savannah.gnu.org/releases/attr/attr-2.4.47.src.tar.gz
 wget https://download.savannah.gnu.org/releases/attr/attr-2.4.47.src.tar.gz.sig
 gpg2 attr-2.4.47.src.tar.gz.sig

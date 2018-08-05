@@ -34,7 +34,7 @@ make install
 cd ..
 
 #download and build libattr
-gpg2 --recv-keys --keyserver=https://pgp.surfnet.nl 0542DF34
+gpg2 --recv-keys 0542DF34
 wget https://download.savannah.gnu.org/releases/attr/attr-2.4.47.src.tar.gz
 wget https://download.savannah.gnu.org/releases/attr/attr-2.4.47.src.tar.gz.sig
 gpg2 attr-2.4.47.src.tar.gz.sig
@@ -60,7 +60,7 @@ cd ..
 #download and build libacl
 wget https://download.savannah.gnu.org/releases/acl/acl-2.2.52.src.tar.gz
 wget https://download.savannah.gnu.org/releases/acl/acl-2.2.52.src.tar.gz.sig
-gpg2 --recv-key 0542DF34
+gpg2 acl-2.2.52.src.tar.gz.sig
 tar -xf acl-2.2.52.src.tar.gz
 cd acl-2.2.52
 #fixing paths to sh

@@ -1,7 +1,7 @@
 #!/data/data/com.termux/files/usr/bin/bash
 set -e
 set -x
-apk -y install make clang openssl-dev perl tsu wget git python python-dev gnupg dirmngr curl autoconf automake sed gettext gzip pkg-config
+apk -y install make clang openssl-dev perl tsu wget git python python-dev gnupg dirmngr curl autoconf automake sed gettext gzip pkg-config libcrypt-dev libzmq-dev
 
 
 pip install virtualenv
